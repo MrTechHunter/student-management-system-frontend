@@ -81,6 +81,17 @@ const AddStudent = () => {
               required
             />
           </div>
+          <div>
+            <label htmlFor="phoneNumber">phoneNumber</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              value={student.phoneNumber}
+              onChange={handleInputChange}
+              name="phoneNumber"
+              required
+            />
+          </div>
           <button onClick={saveStudent}>Submit</button>
         </div>
       )}
