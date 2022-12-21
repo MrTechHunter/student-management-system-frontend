@@ -1,7 +1,7 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import AddStudent from "./components/AddStudent";
-import AddStudentImage from "./images/add-student-img.jpg";
+import StudentList from "./components/StudentList";
 
 function App() {
   return (
@@ -13,14 +13,24 @@ function App() {
 
         <div className="flex justify-center gap-x-3 w-full bg-black p-2"></div>
 
-        <div className="flex justify-end gap-x-3 w-full">
-          <div className="bg-[#f0f0f0] w-[400px] justify-center"></div>
-          <div className="bg-[#f0f0f0] w-[400px] justify-center"></div>
-          <div className="bg-[#f0f0f0] w-[400px] justify-center"></div>
+        <div className="flex">
+          <div>
+            <Link
+              to="/add"
+              className="bg-[#f0f0f0] w-[400px] justify-center p-5"
+            >
+              افزودن دانشجو
+            </Link>
+          </div>
+          <div>
+            <Link to="/" className="bg-[#f0f0f0] w-[400px] justify-center p-5">
+              لیست دانشجویان
+            </Link>
+          </div>
         </div>
 
         <Routes>
-          {/* <Route path="/" element={<StudentsList />} /> */}
+          <Route path="/" element={<StudentList />} />
           {/* <Route path="/students" element={<StudentsList />} /> */}
           <Route path="/add" element={<AddStudent />} />
           {/* <Route path="/students/:id" element={<Student />} /> */}

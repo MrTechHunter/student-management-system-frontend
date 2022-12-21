@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import StudentDataService from "../services/student.service";
-import AddStudentImage from "../images/add-student-img.jpg";
+import StudentDataService from "../../services/student.service";
+import AddStudentImage from "../../images/add-student-img.jpg";
 
 const AddStudent = () => {
   const initialStudentState = {
