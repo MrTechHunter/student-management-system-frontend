@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import StudentDataService from "../services/student.service";
+import AddStudentImage from "../images/add-student-img.jpg";
 
 const AddStudent = () => {
   const initialStudentState = {
@@ -51,50 +52,67 @@ const AddStudent = () => {
   };
 
   return (
-    <div>
-      {submitted ? (
-        <div>
-          <div>You submitted successfully!</div>
-          <button onClick={newStudent}>Add</button>
-        </div>
-      ) : (
-        <div>
+    <div className="container [direction:rtl] mx-auto my-12 flex flex-row justify-center bg-gray-100">
+      <div className="my-16 pl-3">
+        {submitted ? (
           <div>
-            <label htmlFor="firstName">First name</label>
-            <input
-              type="text"
-              id="firstName"
-              value={student.firstName}
-              onChange={handleInputChange}
-              name="firstName"
-              required
-            />
+            <div>دانشجو موردنظر افزوده شد</div>
+            <button onClick={newStudent} className="font-medium">
+              ثبت دانشجو جدید
+            </button>
           </div>
-          <div>
-            <label htmlFor="lastName">Last name</label>
-            <input
-              type="text"
-              id="lastName"
-              value={student.lastName}
-              onChange={handleInputChange}
-              name="lastName"
-              required
-            />
+        ) : (
+          <div className="space-y-5">
+            <div>
+              <label htmlFor="firstName" className="text-black">
+                نام
+              </label>
+              <input
+                type="text"
+                className="border-2 border-wine outline-none rounded mx-2 py-1 px-2 w-[265px] bg-white shadow text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline"
+                id="firstName"
+                value={student.firstName}
+                onChange={handleInputChange}
+                name="firstName"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName">نام خانوادگی</label>
+              <input
+                type="text"
+                className="border-2 border-wine outline-none rounded mx-2 py-1 px-2 w-[200px] bg-white shadow text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline"
+                id="lastName"
+                value={student.lastName}
+                onChange={handleInputChange}
+                name="lastName"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="phoneNumber">تلفن همراه</label>
+              <input
+                type="text"
+                className="border-2 border-wine outline-none rounded mx-2 py-1 px-2 w-[212px] bg-white shadow text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:shadow-outline"
+                id="phoneNumber"
+                value={student.phoneNumber}
+                onChange={handleInputChange}
+                name="phoneNumber"
+                required
+              />
+            </div>
+            <button
+              className="text-[#ffffff] font-thin bg-wine p-2 rounded-[8px] w-[292px]"
+              onClick={saveStudent}
+            >
+              افزودن دانشجو
+            </button>
           </div>
-          <div>
-            <label htmlFor="phoneNumber">phoneNumber</label>
-            <input
-              type="text"
-              id="phoneNumber"
-              value={student.phoneNumber}
-              onChange={handleInputChange}
-              name="phoneNumber"
-              required
-            />
-          </div>
-          <button onClick={saveStudent}>Submit</button>
-        </div>
-      )}
+        )}
+      </div>
+      <div className="h-full border-r-2 border-r-wine pr-5">
+        <img src={AddStudentImage} className="w-[500px]" />
+      </div>
     </div>
   );
 };
