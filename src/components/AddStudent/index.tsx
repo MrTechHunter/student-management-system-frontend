@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import StudentDataService from "../../services/student.service";
+// @ts-ignore
 import AddStudentImage from "../../images/add-student-img.jpg";
 
 const AddStudent = () => {
