@@ -10,7 +10,7 @@ const StudentList = () => {
 
   useEffect(() => {
     retrieveStudents();
-  });
+  }, []);
 
   const onChangeSearchPhoneNumber = (e: any) => {
     const searchPhoneNumber = e.target.value;
@@ -61,40 +61,28 @@ const StudentList = () => {
       });
   };
 
+  console.log("currentStudent", currentStudent);
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex mt-10 ml-4 items-center">
         <div>
           <input
             type="text"
             value={searchPhoneNumber}
             onChange={onChangeSearchPhoneNumber}
-            className="mr-3"
+            className="mr-3 border-2 rounded-[6px]"
           />
         </div>
         <div>
           <button
             onClick={findByPhoneNumber}
-            className="bg-wine text-[#ffffff] p-[6px] rounded-md"
+            className="bg-wine text-[#ffffff] px-[12px] py-[4px] rounded-md"
           >
             جست و جو
           </button>
         </div>
       </div>
       <div>
-        {/* <ul>
-          {students &&
-            students.map((student: any, index: number) => (
-              <li
-                className={index === currentIndex ? "text-green" : ""}
-                onClick={() => setActiveStudent(student, index)}
-                key={index}
-              >
-                {student.firstName}
-              </li>
-            ))}
-        </ul> */}
-
         {/* Beginning of table section */}
         <div className="py-8 [direction:rtl]">
           <div>
@@ -156,8 +144,7 @@ const StudentList = () => {
         </div>
         {/* End of table section */}
 
-        <button onClick={removeAllStudents}>حذف همه</button>
-
+        <button onClick={removeAllStudents} className="bg-wine text-[#ffffff] p-2 ml-3 rounded-[10px]">حذف همه</button>
         <div>
           {currentStudent ? (
             <div>
@@ -180,7 +167,6 @@ const StudentList = () => {
                 </label>
                 {currentStudent.graduated ? "فارغ التحصیل" : "در حال تحصیل"}
               </div>
-
               <Link to={"/students/" + currentStudent.id}>ویرایش</Link>
             </div>
           ) : (

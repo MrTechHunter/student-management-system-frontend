@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StudentDataService from "../../services/student.service";
 // @ts-ignore
 import AddStudentImage from "../../images/add-student-img.jpg";
 
 const AddStudent = () => {
+  let navigate = useNavigate();
+
   const initialStudentState = {
     id: null,
     firstName: "",
@@ -39,6 +42,7 @@ const AddStudent = () => {
           grade: response.data.grade,
           graduated: response.data.graduated,
         });
+        navigate("/");
         setSubmitted(true);
         console.log(response.data);
       })

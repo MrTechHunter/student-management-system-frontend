@@ -37,7 +37,7 @@ function App() {
         </Routes>
       </div>
       <div className="flex justify-center gap-x-3 w-full bg-black p-2"></div>
-      <div className="text-center mt-2 font-semibold">ⓒ 2022 Mahdi Hamldar</div>
+      <div className="text-center mt-2 font-semibold">ⓒ 202 Mahdi Hamldar</div>
     </>
   );
 }
