@@ -1,44 +1,63 @@
-import React from "react";
+import Box from "@mui/material/Box/Box";
+import List from "@mui/material/List/List";
+import ListItemButton from "@mui/material/ListItemButton/ListItemButton";
+import Stack from "@mui/material/Stack";
+import ListItemText from "@mui/material/ListItemText/ListItemText";
+import ListItem from "@mui/material/ListItem/ListItem";
+
+import Container from "@mui/material/Container";
+import Login from "./components/Login";
+
 import { Link, Route, Routes } from "react-router-dom";
-import AddStudent from "./components/AddStudent";
-import StudentList from "./components/StudentList";
 
 function App() {
   return (
-    <>
-      <div>
-        <h1 className="text-right bg-wine text-[#ffffff] text-2xl text-red-400 px-6 py-5 font-bold">
-          سامانه مدیریت دانشجویان
-        </h1>
+    <div
+      style={{
+        backgroundColor: "#F2F2F2",
+      }}
+    >
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
 
-        <div className="flex justify-center gap-x-3 w-full bg-black p-2"></div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <List component={Stack} direction="row">
+          <ListItem>
+            <ListItemButton>
+              <ListItemText
+                style={{ textAlign: "center" }}
+                primary="درباره ما"
+              />
+            </ListItemButton>
+          </ListItem>
 
-        <div className="flex">
-          <div>
-            <Link
-              to="/add"
-              className="bg-[#f0f0f0] w-[400px] justify-center p-5"
-            >
-              افزودن دانشجو
-            </Link>
-          </div>
-          <div>
-            <Link to="/" className="bg-[#f0f0f0] w-[400px] justify-center p-5">
-              لیست دانشجویان
-            </Link>
-          </div>
-        </div>
+          <ListItem>
+            <ListItemButton>
+              <ListItemText
+                style={{ textAlign: "center" }}
+                primary="قوانین و مقررات"
+              />
+            </ListItemButton>
+          </ListItem>
 
-        <Routes>
-          <Route path="/" element={<StudentList />} />
-          {/* <Route path="/students" element={<StudentsList />} /> */}
-          <Route path="/add" element={<AddStudent />} />
-          {/* <Route path="/students/:id" element={<Student />} /> */}
-        </Routes>
-      </div>
-      <div className="flex justify-center gap-x-3 w-full bg-black p-2"></div>
-      <div className="text-center mt-2 font-semibold">ⓒ 2022 Mahdi Hamldar</div>
-    </>
+          <ListItem>
+            <ListItemButton>
+              <ListItemText
+                style={{ textAlign: "center" }}
+                primary="پشتیبانی"
+              />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
+    </div>
   );
 }
 
