@@ -7,8 +7,9 @@ function Login() {
     <Container
       maxWidth="md"
       sx={{
-        width: "1512px",
-        height: "982px",
+        width: "855px",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Box
@@ -17,7 +18,7 @@ function Login() {
           justifyContent: "center",
         }}
       >
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" width={"364px"} height={"142px"} />
       </Box>
 
       <Paper
@@ -32,12 +33,12 @@ function Login() {
         <Box>
           <Typography
             variant="h5"
+            // className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
             gutterBottom
             sx={{
               textAlign: "center",
               paddingTop: "40px",
               fontWeight: "bold",
-              textShadow: "#000 0px 4px 6px",
               marginBottom: "15px",
             }}
           >
@@ -46,10 +47,10 @@ function Login() {
 
           <Typography
             variant="subtitle2"
+            // className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
             gutterBottom
             sx={{
               textAlign: "center",
-              textShadow: "#000 0px 4px 4px",
               color: "#ADADAE",
             }}
           >
@@ -71,6 +72,7 @@ function Login() {
             label="شماره موبایل"
             variant="outlined"
             sx={{
+              width: "631px",
               marginX: "20px",
             }}
           />
@@ -80,6 +82,7 @@ function Login() {
             fullWidth
             color="success"
             sx={{
+              width: "631px",
               marginTop: "20px",
               paddingY: "15px",
             }}
