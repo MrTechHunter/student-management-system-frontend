@@ -35,13 +35,14 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const verifySmsCode = async (phoneNumber: string, code: string) => {
     // Call SMS Code Verification API
-    UserDataService.invite({ username: phoneNumber, code: code })
-      .then((response) => {
-        console.log("confirm response", response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+
+    // UserDataService.invite({ username: phoneNumber, code: code })
+    //   .then((response) => {
+    //     console.log("confirm response", response.data);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
 
     // Update isAuthenticated
     setIsAuthenticated(true);

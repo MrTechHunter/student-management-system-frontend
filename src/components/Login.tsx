@@ -17,7 +17,7 @@ function Login() {
   const [showSmsCodeVerification, setShowSmsCodeVerification] = useState(false);
 
   const handleLogin = async () => {
-    await loginWithPhoneNumber(phoneNumber);
+    // await loginWithPhoneNumber(phoneNumber);
     setShowSmsCodeVerification(true);
   };
 
@@ -32,6 +32,7 @@ function Login() {
   };
 
   // console.log("isCodeComplete", isCodeComplete);
+  console.log("verificationCode: ", verificationCode);
   return (
     <LogoContainerWrapper>
       {showSmsCodeVerification ? (

@@ -24,6 +24,7 @@ const VerificationCodeInput = ({ length, onComplete }: any) => {
     }
   }, [code, currentIndex, length, onComplete]);
 
+  console.log(code.join(""));
   return (
     <>
       <Grid
