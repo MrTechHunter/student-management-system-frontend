@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
 import Login from "./components/Login";
-import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
       </Routes>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

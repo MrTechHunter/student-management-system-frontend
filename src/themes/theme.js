@@ -7,6 +7,7 @@ const theme = createTheme({
     fontWeightMedium: 500, // Medium font weight
     fontWeightBold: 700, // Bold font weight
   },
+  direction: "rtl",
 });
 
 export default theme;

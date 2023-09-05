@@ -1,9 +1,20 @@
+import { useState } from "react";
+
 import { Box, Button, TextField, Typography } from "@mui/material";
-import LogoContanerWrapper from "./LogoContanerWrapper";
+
+import { useAuth } from "../contexts/AuthContext";
+import LogoContainerWrapper from "./Wrappers/LogoContainerWrapper";
 
 function Login() {
+  const { loginWithPhoneNumber } = useAuth();
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handleLogin = async () => {
+    await loginWithPhoneNumber(phoneNumber);
+  };
+
   return (
-    <LogoContanerWrapper>
+    <LogoContainerWrapper>
       <Box>
         <Typography
           variant="h5"
@@ -41,17 +52,21 @@ function Login() {
         }}
       >
         <TextField
-          id="outlined-basic"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          type="tel"
           fullWidth
           label="شماره موبایل"
           variant="outlined"
           sx={{
             width: "631px",
             marginX: "20px",
+            direction: "rtl",
           }}
         />
 
         <Button
+          onClick={handleLogin}
           variant="contained"
           fullWidth
           color="success"
@@ -64,7 +79,7 @@ function Login() {
           ارسال کد
         </Button>
       </Box>
-    </LogoContanerWrapper>
+    </LogoContainerWrapper>
   );
 }
 
