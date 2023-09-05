@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import { Box, Paper } from "@mui/material";
-import logo from "../images/logo.png";
+import logo from "../assets/images/logo.png";
 
 function LogoContanerWrapper(props: any) {
   return (
