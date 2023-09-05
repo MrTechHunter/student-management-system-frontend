@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box/Box";
 import List from "@mui/material/List/List";
-import ListItemButton from "@mui/material/ListItemButton/ListItemButton";
-import Stack from "@mui/material/Stack";
-import ListItemText from "@mui/material/ListItemText/ListItemText";
 import ListItem from "@mui/material/ListItem/ListItem";
+import ListItemButton from "@mui/material/ListItemButton/ListItemButton";
+import ListItemText from "@mui/material/ListItemText/ListItemText";
+import Stack from "@mui/material/Stack";
 
 function Footer() {
   return (
@@ -13,10 +13,10 @@ function Footer() {
         justifyContent: "center",
       }}
     >
-      <List component={Stack} direction="row">
+      <List component={Stack} direction="row" minWidth="500px">
         <ListItem>
           <ListItemButton>
-            <ListItemText style={{ textAlign: "center" }} primary="درباره ما" />
+            <ListItemText style={{ textAlign: "center" }} primary="پشتیبانی" />
           </ListItemButton>
         </ListItem>
 
@@ -31,7 +31,7 @@ function Footer() {
 
         <ListItem>
           <ListItemButton>
-            <ListItemText style={{ textAlign: "center" }} primary="پشتیبانی" />
+            <ListItemText style={{ textAlign: "center" }} primary="درباره ما" />
           </ListItemButton>
         </ListItem>
       </List>

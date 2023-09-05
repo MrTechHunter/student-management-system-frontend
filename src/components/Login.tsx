@@ -22,9 +22,8 @@ function Login() {
           gutterBottom
           sx={{
             textAlign: "center",
-            paddingTop: "40px",
+            marginTop: "60px",
             fontWeight: "bold",
-            marginBottom: "15px",
           }}
         >
           ورود / ثبت نام متخصصین
@@ -33,20 +32,21 @@ function Login() {
         <Typography
           variant="subtitle2"
           // className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
-          gutterBottom
           sx={{
             textAlign: "center",
             color: "#ADADAE",
           }}
         >
-          .برای ورود و یا ثبت‌نام در بروکلی لطفا شماره موبایل خود را وارد کنید
+          برای ورود و یا ثبت‌نام در بروکلی لطفا شماره موبایل خود را وارد کنید.
         </Typography>
       </Box>
 
       <Box
         sx={{
           display: "flex",
-          padding: 5,
+          paddingX: "112px",
+          paddingTop: "60px",
+          paddingBottom: "79px",
           flexDirection: "column",
           alignItems: "center",
         }}
@@ -60,7 +60,7 @@ function Login() {
           variant="outlined"
           sx={{
             width: "631px",
-            marginX: "20px",
+            height: "75px",
             direction: "rtl",
           }}
         />
