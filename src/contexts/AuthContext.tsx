@@ -1,9 +1,11 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, ReactNode, useContext, useState } from "react";
+
+import UserDataService from "../services/user.service";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   loginWithPhoneNumber: (phoneNumber: string) => Promise<void>;
-  verifySmsCode: (code: string) => Promise<void>;
+  verifySmsCode: (phoneNumber: string, code: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -22,16 +24,32 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const loginWithPhoneNumber = async (phoneNumber: string) => {
     // Send SMS API Call
-    // Update isAuthenticated
+    UserDataService.invite({ username: phoneNumber })
+      .then((response) => {
+        console.log("invite response", response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
-  const verifySmsCode = async (code: string) => {
+  const verifySmsCode = async (phoneNumber: string, code: string) => {
     // Call SMS Code Verification API
+    UserDataService.invite({ username: phoneNumber, code: code })
+      .then((response) => {
+        console.log("confirm response", response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     // Update isAuthenticated
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
     // Logout logic and isAuthenticated updation
+    setIsAuthenticated(false);
   };
 
   return (

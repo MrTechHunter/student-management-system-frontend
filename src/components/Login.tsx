@@ -7,7 +7,8 @@ import VerificationCodeInput from "./VerificationCodeInput";
 import LogoContainerWrapper from "./Wrappers/LogoContainerWrapper";
 
 function Login() {
-  const { loginWithPhoneNumber } = useAuth();
+  const { loginWithPhoneNumber, verifySmsCode, isAuthenticated, logout } =
+    useAuth();
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const [verificationCode, setVerificationCode] = useState("");
@@ -23,12 +24,14 @@ function Login() {
   const handleVerificationCodeComplete = (code: any) => {
     // Handle the complete verification code
     setVerificationCode(code);
-    setIsCodeComplete(true);
+    // setIsCodeComplete(true);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    await verifySmsCode(phoneNumber, verificationCode);
+  };
 
-  console.log("isCodeComplete", isCodeComplete);
+  // console.log("isCodeComplete", isCodeComplete);
   return (
     <LogoContainerWrapper>
       {showSmsCodeVerification ? (
@@ -79,7 +82,7 @@ function Login() {
               variant="contained"
               fullWidth
               color="success"
-              disabled={!isCodeComplete}
+              // disabled={!isCodeComplete}
               sx={{
                 width: "631px",
                 marginTop: "20px",
