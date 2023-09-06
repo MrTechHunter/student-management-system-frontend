@@ -19,8 +19,8 @@ function Dashboard() {
   return (
     <div>
       <div>
-        <div>{userProfile?.username} نام کاربری:</div>
-        <div>{userProfile?.mobile} همراه:</div>
+        <div>{userProfile?.username} نام کاربری</div>
+        <div>{userProfile?.mobile} همراه</div>
 
         <button onClick={handleLogout}>خروج از حساب کاربری</button>
       </div>
