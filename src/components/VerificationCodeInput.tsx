@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 
-const VerificationCodeInput = ({ length, onComplete }: any) => {
+import SmsCodeTimer from "./SmsCodeTimer";
+
+const VerificationCodeInput = ({ length, onComplete, phoneNumber }: any) => {
   const [code, setCode] = useState<string[]>(Array(length).fill(""));
   const inputRefs = useRef<React.RefObject<HTMLInputElement>[]>(
     Array.from({ length }, () => React.createRef<HTMLInputElement>())
@@ -67,17 +68,7 @@ const VerificationCodeInput = ({ length, onComplete }: any) => {
           </Grid>
         ))}
       </Grid>
-
-      <Typography
-        variant="subtitle2"
-        sx={{
-          textAlign: "center",
-          color: "#606060",
-          marginTop: "12px",
-        }}
-      >
-        برای درخواست کد جدید 1 دقیقه و 60 ثانیه صبر کنید.
-      </Typography>
+      <SmsCodeTimer phoneNumber={phoneNumber} />
     </>
   );
 };

@@ -7,7 +7,7 @@ import VerificationCodeInput from "./VerificationCodeInput";
 import LogoContainerWrapper from "./Wrappers/LogoContainerWrapper";
 
 function Login() {
-  const { loginWithPhoneNumber, confirmSmsCode, isAuthenticated } = useAuth();
+  const { loginWithPhoneNumber, confirmSmsCode } = useAuth();
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -84,6 +84,7 @@ function Login() {
             <VerificationCodeInput
               length={4}
               onComplete={handleVerificationCodeComplete}
+              phoneNumber={phoneNumber}
             />
 
             <Button
