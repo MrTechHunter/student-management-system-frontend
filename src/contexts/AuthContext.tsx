@@ -14,6 +14,7 @@ type IAuthContext = {
   loginWithPhoneNumber: (phoneNumber: string) => Promise<void>;
   confirmSmsCode: (phoneNumber: string, code: string) => Promise<any>;
   logout: () => void;
+  errorMessage: string;
 };
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
@@ -29,6 +30,7 @@ export function useAuth() {
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userProfile, setUserProfile] = useState<any>(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -37,9 +39,13 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     try {
       await AuthDataService.invite({ username: phoneNumber });
       // If the SMS is sent successfully, update state or redirect
-    } catch (error) {
-      console.error(error);
-      // Handle the error (e.g., show a message to the user)
+    } catch (error: any) {
+      if (error.response) {
+        const responseData = error?.response?.data?.data.message;
+        setErrorMessage(responseData);
+        console.log(error);
+      }
+      console.log(error);
     }
   };
 
@@ -57,9 +63,12 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       }
 
       // Extract and store the user profile data from the response
-    } catch (error) {
-      console.error(error);
-      // Handle the error (e.g., show a message to the user)
+    } catch (error: any) {
+      if (error.response) {
+        const responseData = error?.response?.data?.data.message;
+        setErrorMessage(responseData);
+        console.log(error);
+      }
     }
   };
 
@@ -78,6 +87,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         loginWithPhoneNumber,
         confirmSmsCode,
         logout,
+        errorMessage,
       }}
     >
       {children}

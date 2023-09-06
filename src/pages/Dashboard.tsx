@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
 
+import { Button } from "@mui/material";
+
 import { useAuth } from "../contexts/AuthContext";
 
 function Dashboard() {
@@ -20,9 +22,20 @@ function Dashboard() {
     <div>
       <div>
         <div>{userProfile?.username} نام کاربری</div>
-        <div>{userProfile?.mobile} همراه</div>
 
-        <button onClick={handleLogout}>خروج از حساب کاربری</button>
+        <Button
+          onClick={handleLogout}
+          variant="contained"
+          fullWidth
+          color="error"
+          sx={{
+            width: "631px",
+            marginTop: "20px",
+            paddingY: "15px",
+          }}
+        >
+          خروج از حساب کاربری
+        </Button>
       </div>
     </div>
   );

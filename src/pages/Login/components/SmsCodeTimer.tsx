@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Typography } from "@mui/material";
 
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const SmsCodeTimer = ({ phoneNumber }: any) => {
   const { loginWithPhoneNumber } = useAuth();

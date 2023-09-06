@@ -2,9 +2,9 @@ import React from "react";
 
 import { Navigate, Outlet, Route, Routes as Router } from "react-router-dom";
 
-import Login from "./components/Login";
 import { useAuth } from "./contexts/AuthContext";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 type Props = {};
 

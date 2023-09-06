@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 
-import { useAuth } from "../contexts/AuthContext";
-import VerificationCodeInput from "./VerificationCodeInput";
-import LogoContainerWrapper from "./Wrappers/LogoContainerWrapper";
+import LogoContainerWrapper from "../../components/Wrappers/LogoContainerWrapper";
+import { useAuth } from "../../contexts/AuthContext";
+import VerificationCodeInput from "./components/VerificationCodeInput";
 
 function Login() {
   const { loginWithPhoneNumber, confirmSmsCode } = useAuth();
@@ -17,34 +17,45 @@ function Login() {
 
   const handleLoginSubmit = async () => {
     if (!isCodeComplete) {
-      setErrorMessage("Verification code is not complete.");
+      setErrorMessage("کد فعالسازی به صورت کامل وارد نشده است");
       return;
     }
-
-    try {
-      await confirmSmsCode(phoneNumber, verificationCode);
-      console.log("Verification Code Submitted:", verificationCode);
-    } catch (error) {
-      setErrorMessage("Verification code is not correct. Please try again.");
-      return;
+    if (
+      phoneNumber !== undefined &&
+      phoneNumber !== null &&
+      verificationCode !== undefined &&
+      verificationCode !== null
+    ) {
+      try {
+        await confirmSmsCode(phoneNumber, verificationCode);
+        console.log("Verification Code Submitted:", verificationCode);
+      } catch (error) {
+        setErrorMessage("کد فعالسازی اشتباه میباشد لطفا مجدد سعی نمایید");
+        return;
+      }
     }
   };
 
   const handleSendSMSCode = async () => {
-    await loginWithPhoneNumber(phoneNumber);
-    setShowSmsCodeVerification(true);
+    if (phoneNumber !== undefined && phoneNumber !== null) {
+      await loginWithPhoneNumber(phoneNumber);
+      setShowSmsCodeVerification(true);
+    }
   };
 
   const handleVerificationCodeComplete = (code: any) => {
-    console.log("handleVerificationCodeComplete is called with code:", code); // Add this line for debugging
+    console.log("handleVerificationCodeComplete is called with code:", code);
     setVerificationCode(code);
     setIsCodeComplete(true);
   };
+
+  console.log("errorMessage: ", errorMessage);
 
   return (
     <LogoContainerWrapper>
       {showSmsCodeVerification ? (
         <>
+          {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
           <Box>
             <Typography
               variant="h5"
