@@ -2,16 +2,16 @@ import React, { useState } from "react";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
-import { useAuth } from "../contexts/AuthContext";
 import VerificationCodeInput from "./VerificationCodeInput";
 import LogoContainerWrapper from "./Wrappers/LogoContainerWrapper";
 
 function Login() {
-  const { loginWithPhoneNumber, verifySmsCode, isAuthenticated, logout } =
-    useAuth();
+  // const { loginWithPhoneNumber, verifySmsCode, isAuthenticated, logout } =
+  //   useAuth();
+
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const [verificationCode, setVerificationCode] = useState("");
+  const [verificationCode, setVerificationCode] = useState(null);
   const [isCodeComplete, setIsCodeComplete] = useState(false);
 
   const [showSmsCodeVerification, setShowSmsCodeVerification] = useState(false);
@@ -22,17 +22,29 @@ function Login() {
   };
 
   const handleVerificationCodeComplete = (code: any) => {
+    console.log("handleVerificationCodeComplete is called with code:", code); // Add this line for debugging
+
     // Handle the complete verification code
     setVerificationCode(code);
-    // setIsCodeComplete(true);
+    setIsCodeComplete(true);
   };
 
-  const handleSubmit = async () => {
-    await verifySmsCode(phoneNumber, verificationCode);
+  const handleSubmit = () => {
+    console.log("Verification Code Submitted:", verificationCode); // Log the value
+
+    // You can perform any other actions here as needed.
   };
 
-  // console.log("isCodeComplete", isCodeComplete);
-  console.log("verificationCode: ", verificationCode);
+  // const handleVerificationCodeComplete = (code: any) => {
+  //   // Handle the complete verification code
+  //   setVerificationCode(code);
+  //   // setIsCodeComplete(true);
+  // };
+
+  // const handleSubmit = async () => {
+  //   await verifySmsCode(phoneNumber, verificationCode);
+  // };
+
   return (
     <LogoContainerWrapper>
       {showSmsCodeVerification ? (

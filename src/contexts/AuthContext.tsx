@@ -44,6 +44,8 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     //     console.log(e);
     //   });
 
+    console.log("invite api called");
+
     // Update isAuthenticated
     setIsAuthenticated(true);
   };
