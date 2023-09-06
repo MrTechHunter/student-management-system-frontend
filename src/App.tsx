@@ -1,21 +1,22 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import Login from "./components/Login";
-import Dashboard from "./pages/Dashboard";
+import AuthProvider from "./contexts/AuthContext";
+import Routes from "./Routes";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div
       style={{
         backgroundColor: "#F2F2F2",
       }}
     >
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Dashboard />} />
-      </Routes>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,7 +1,6 @@
 import "./index.css";
 
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 
@@ -10,7 +9,6 @@ import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
 
 import App from "./App";
-import AuthProvider from "./contexts/AuthContext";
 import theme from "./themes/theme";
 
 // Create rtl cache
@@ -26,11 +24,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <CacheProvider value={cacheRtl}>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </BrowserRouter>
+      <App />
     </ThemeProvider>
   </CacheProvider>
 );
