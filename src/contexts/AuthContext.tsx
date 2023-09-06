@@ -1,11 +1,14 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
-import UserDataService from "../services/user.service";
+import { Navigate } from "react-router-dom";
+
+import AuthDataService from "../services/auth.service";
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  userProfile: any;
   loginWithPhoneNumber: (phoneNumber: string) => Promise<void>;
-  verifySmsCode: (phoneNumber: string, code: string) => Promise<void>;
+  confirmSmsCode: (phoneNumber: string, code: string) => Promise<any>;
   logout: () => void;
 }
 
@@ -21,43 +24,57 @@ export function useAuth() {
 
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userProfile, setUserProfile] = useState<any>(null);
 
   const loginWithPhoneNumber = async (phoneNumber: string) => {
-    // Send SMS API Call
-    UserDataService.invite({ username: phoneNumber })
-      .then((response) => {
-        console.log("invite response", response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // Send SMS API Call By Phone Number
+    try {
+      await AuthDataService.invite({ username: phoneNumber });
+      // If the SMS is sent successfully, update state or redirect
+    } catch (error) {
+      console.error(error);
+      // Handle the error (e.g., show a message to the user)
+    }
   };
 
-  const verifySmsCode = async (phoneNumber: string, code: string) => {
-    // Call SMS Code Verification API
+  const confirmSmsCode = async (phoneNumber: string, code: string) => {
+    // Call SMS Code Verification API By Phone Number and Code
 
-    // UserDataService.invite({ username: phoneNumber, code: code })
-    //   .then((response) => {
-    //     console.log("confirm response", response.data);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
+    try {
+      const requestBody = { username: phoneNumber, code: code };
+      const response = await AuthDataService.confirm(requestBody);
+      // If verification is successful, set isAuthenticated to true
 
-    console.log("invite api called");
+      if (response?.data?.status === "success") {
+        setIsAuthenticated(true);
+        setUserProfile(response?.data?.data?.profile);
 
-    // Update isAuthenticated
-    setIsAuthenticated(true);
+        return <Navigate to="/" />;
+      }
+
+      // Extract and store the user profile data from the response
+    } catch (error) {
+      console.error(error);
+      // Handle the error (e.g., show a message to the user)
+    }
   };
 
   const logout = () => {
     // Logout logic and isAuthenticated updation
     setIsAuthenticated(false);
+    // Clear the user profile data
+    setUserProfile(null);
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, loginWithPhoneNumber, verifySmsCode, logout }}
+      value={{
+        isAuthenticated,
+        userProfile,
+        loginWithPhoneNumber,
+        confirmSmsCode,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

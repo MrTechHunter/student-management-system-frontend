@@ -5,31 +5,28 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 const VerificationCodeInput = ({ length, onComplete }: any) => {
-  const [code, setCode] = useState(Array(length).fill(""));
-
+  const [code, setCode] = useState<string[]>(Array(length).fill(""));
   const inputRefs = useRef<React.RefObject<HTMLInputElement>[]>(
     Array.from({ length }, () => React.createRef<HTMLInputElement>())
   );
 
   useEffect(() => {
-    // Focus on the rightmost input field when the component mounts
-    inputRefs.current[length - 1].current?.focus();
+    // Focus on the leftmost input field when the component mounts
+    inputRefs.current[0].current?.focus();
   }, []);
 
-  const handleCodeChange = (e: any, index: any) => {
+  const handleCodeChange = (e: any, index: number) => {
     const value = e.target.value;
 
     if (/^[0-9]*$/.test(value) && value.length <= 1) {
+      // Update the code state correctly
       const newCode = [...code];
-
-      // Set the current input value
       newCode[index] = value;
       setCode(newCode);
 
-      // Move to the previous input field if not at the beginning of the code
-      if (index > 0) {
-        // Use the .current property to access the DOM element and call .focus()
-        inputRefs.current[index - 1].current?.focus();
+      if (index < length - 1) {
+        // Move to the next input field on the right
+        inputRefs.current[index + 1].current?.focus();
       }
 
       // Check if the code is complete
@@ -39,6 +36,7 @@ const VerificationCodeInput = ({ length, onComplete }: any) => {
     }
   };
 
+  console.log("code: ", code);
   return (
     <>
       <Grid
@@ -47,9 +45,10 @@ const VerificationCodeInput = ({ length, onComplete }: any) => {
         sx={{
           display: "flex",
           justifyContent: "center",
+          direction: "rtl",
         }}
       >
-        {code.map((digit, index) => (
+        {Array.from({ length }, (_, index) => (
           <Grid item xs={1} key={index}>
             <TextField
               key={index}
@@ -61,7 +60,7 @@ const VerificationCodeInput = ({ length, onComplete }: any) => {
                   textAlign: "center",
                 },
               }}
-              value={digit}
+              value={code[index]}
               onChange={(e) => handleCodeChange(e, index)}
               inputRef={inputRefs.current[index]}
             />
