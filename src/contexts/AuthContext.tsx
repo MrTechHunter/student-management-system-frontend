@@ -29,7 +29,7 @@ export function useAuth() {
 }
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [userProfile, setUserProfile] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
