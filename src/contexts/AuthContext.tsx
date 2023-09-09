@@ -2,6 +2,7 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import ErrorSnackbar from "../components/ErrorSnackbar";
 import AuthDataService from "../services/auth.service";
 
 type Props = {
@@ -27,7 +28,7 @@ export function useAuth() {
   return context;
 }
 
-const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+const AuthProvider: React.FC<Props> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userProfile, setUserProfile] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -42,7 +43,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     } catch (error: any) {
       if (error.response) {
         const responseData = error?.response?.data?.data.message;
-        setErrorMessage(responseData);
+        setErrorMessage(responseData || "");
         console.log(error);
       }
       console.log(error);
@@ -66,9 +67,10 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     } catch (error: any) {
       if (error.response) {
         const responseData = error?.response?.data?.data.message;
-        setErrorMessage(responseData);
+        setErrorMessage(responseData || "");
         console.log(error);
       }
+      console.log(error);
     }
   };
 
@@ -91,6 +93,12 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       }}
     >
       {children}
+      {errorMessage && (
+        <ErrorSnackbar
+          errorMessage={errorMessage}
+          onClose={() => setErrorMessage("")}
+        />
+      )}
     </AuthContext.Provider>
   );
 };
