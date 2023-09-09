@@ -45,7 +45,7 @@ function MyDrawer() {
       }}
     >
       <div
-        className={`drawer-menu ${open ? "w-[283px]" : "w-[70px]"}`}
+        className={`${open ? "w-[283px]" : "w-[70px]"}`}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
         style={{
