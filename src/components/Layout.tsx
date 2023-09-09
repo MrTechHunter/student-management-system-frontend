@@ -35,9 +35,20 @@ function Layout(props: Props) {
           overflow: "auto",
         }}
       >
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4, mr: "48px" }}>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4, mr: 3 }}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
+              <Typography
+                component="h4"
+                variant="h4"
+                color="inherit"
+                noWrap
+                sx={{
+                  mb: "20px",
+                }}
+              >
+                {props.title}
+              </Typography>
               <Paper
                 sx={{
                   p: 4,
@@ -46,9 +57,6 @@ function Layout(props: Props) {
                   height: "80vh",
                 }}
               >
-                <Typography component="h1" variant="h6" color="inherit" noWrap>
-                  {props.title}
-                </Typography>
                 {props.children}
               </Paper>
             </Grid>
