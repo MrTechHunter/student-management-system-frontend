@@ -1,5 +1,5 @@
-import Layout from "../components/Layout";
-import { useAuth } from "../contexts/AuthContext";
+import Layout from "../../components/Layout";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Dashboard() {
   const { userProfile } = useAuth();
