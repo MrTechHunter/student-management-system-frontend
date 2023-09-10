@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
@@ -58,15 +60,22 @@ function MyDrawer() {
       >
         <List>
           {[
-            "داشبورد",
-            "مشاهده همه کاربران",
-            "تراکنش‌ها",
-            "اطلاعات متخصص",
-            "پشتیبانی",
-          ].map((text, index) => (
+            { title: "داشبورد", link: "/" },
+            { title: "مشاهده همه کاربران", link: "/members" },
+            { title: "تراکنش‌ها", link: "/transactions" },
+            { title: "اطلاعات متخصص", link: "/coach-information" },
+            { title: "پشتیبانی", link: "/support" },
+          ].map((item, index) => (
             <>
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <ListItem
+                key={item.title}
+                disablePadding
+                sx={{ display: "block" }}
+              >
                 <ListItemButton
+                  key={item.title}
+                  component={Link}
+                  to={item.link}
                   sx={{
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
@@ -121,7 +130,7 @@ function MyDrawer() {
                     )}
                   </ListItemIcon>
                   <ListItemText
-                    primary={text}
+                    primary={item.title}
                     sx={{ color: "#FFFFFF", opacity: open ? 1 : 0 }}
                   />
                 </ListItemButton>
