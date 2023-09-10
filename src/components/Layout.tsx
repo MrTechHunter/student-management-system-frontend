@@ -8,7 +8,9 @@ import { useAuth } from "../contexts/AuthContext";
 import CollapsibleDrawer from "./CollapsibleDrawer";
 
 type Props = {
-  title: string;
+  title?: string;
+  width?: string;
+  height?: string;
   children?: ReactNode;
 };
 
@@ -54,7 +56,8 @@ function Layout(props: Props) {
                   p: 4,
                   display: "flex",
                   flexDirection: "column",
-                  height: "80vh",
+                  width: `${props.width ? props.width : {}}`,
+                  height: `${props.height ? props.height : "80vh"}`,
                 }}
               >
                 {props.children}
