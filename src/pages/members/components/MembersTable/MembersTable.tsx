@@ -1,5 +1,4 @@
 import {
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -28,10 +27,10 @@ const MembersTable = <T extends object>({
   showViewButton = true,
 }: BaseTableProps<T>) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table
         sx={{
-          minWidth: 650,
+          minWidth: "690px",
           border: "1px solid #EAECF0",
           borderRadius: "15px",
         }}
@@ -42,13 +41,18 @@ const MembersTable = <T extends object>({
             {columns.map((column) => (
               <TableCell
                 key={column.key.toString()}
-                sx={{ textAlign: "center", fontWeight: "700" }}
+                sx={{
+                  textAlign: "center",
+                  fontWeight: "700",
+                }}
               >
                 {column.label}
               </TableCell>
             ))}
             {showViewButton && (
-              <TableCell sx={{ textAlign: "center", fontWeight: "700" }}>
+              <TableCell
+                sx={{ textAlign: "center", fontWeight: "700", height: "50px" }}
+              >
                 ویرایش و مشاهده اطلاعات
               </TableCell>
             )}
@@ -65,7 +69,7 @@ const MembersTable = <T extends object>({
               {columns.map((column, columnIndex) => (
                 <TableCell
                   key={columnIndex}
-                  sx={{ textAlign: "center", fontSize: "14px" }}
+                  sx={{ textAlign: "center", fontSize: "14px", height: "70px" }}
                 >
                   {column.key === "dietStatus" ? (
                     row[column.key] === true ? (
