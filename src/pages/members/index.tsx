@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -6,14 +6,15 @@ import { Button, TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 
 import Layout from "../../components/Layout";
+import { useUsersList } from "../../contexts/UsersListContext";
 import MembersTable from "./components/MembersTable/MembersTable";
 
 interface MyData {
   name: string;
-  dietSubmitDate: string;
+  start_date: string;
   gender: string;
-  age: number;
-  dietStatus: boolean;
+  birth_year: string;
+  status: boolean;
 }
 
 interface TableColumn<T> {
@@ -27,14 +28,20 @@ function isBoolean(value: any): value is boolean {
 }
 
 const Members: React.FC = () => {
+  const { usersListData, fetchUsersList } = useUsersList();
+
+  useEffect(() => {
+    fetchUsersList();
+  }, []);
+
   const columns: TableColumn<MyData>[] = [
     { label: "نام و نام خانوادگی", key: "name" },
-    { label: "تاریخ ثبت رژیم", key: "dietSubmitDate" },
+    { label: "تاریخ ثبت رژیم", key: "start_date" },
     { label: "جنسیت", key: "gender" },
-    { label: "سن", key: "age" },
+    { label: "سن", key: "birth_year" },
     {
       label: "تکمیل بودن رژیم",
-      key: "dietStatus",
+      key: "status",
       render: (data: ReactNode) => {
         if (isBoolean(data)) {
           return data ? <div>Completed</div> : <div>Not Completed</div>;
@@ -44,47 +51,11 @@ const Members: React.FC = () => {
     },
   ];
 
-  const rows: MyData[] = [
-    {
-      name: "مهدیه فرخی",
-      dietSubmitDate: "1402/03/25",
-      gender: "زن",
-      age: 19,
-      dietStatus: false,
-    },
-    {
-      name: "مهدیه فرخی",
-      dietSubmitDate: "1402/03/25",
-      gender: "زن",
-      age: 19,
-      dietStatus: true,
-    },
-    {
-      name: "مهدیه فرخی",
-      dietSubmitDate: "1402/03/25",
-      gender: "زن",
-      age: 19,
-      dietStatus: true,
-    },
-    {
-      name: "مهدیه فرخی",
-      dietSubmitDate: "1402/03/25",
-      gender: "زن",
-      age: 19,
-      dietStatus: false,
-    },
-    {
-      name: "مهدیه فرخی",
-      dietSubmitDate: "1402/03/25",
-      gender: "زن",
-      age: 19,
-      dietStatus: true,
-    },
-  ];
-
   const handleViewClick = (rowData: MyData) => {
     console.log("View button clicked for:", rowData.name);
   };
+
+  console.log("usersListData: ", usersListData);
 
   return (
     <Layout title={"مشاهده همه کاربران"} width={"1150px"}>
@@ -109,7 +80,7 @@ const Members: React.FC = () => {
         </div>
       </div>
       <MembersTable
-        rows={rows}
+        rows={usersListData || []}
         columns={columns}
         onViewClick={handleViewClick}
       />

@@ -1,3 +1,5 @@
+import moment from "jalali-moment";
+
 import {
   Table,
   TableBody,
@@ -71,8 +73,8 @@ const MembersTable = <T extends object>({
                   key={columnIndex}
                   sx={{ textAlign: "center", fontSize: "14px", height: "70px" }}
                 >
-                  {column.key === "dietStatus" ? (
-                    row[column.key] === true ? (
+                  {column.key === "status" ? (
+                    row[column.key] === "active" ? (
                       <span className="w-[103px] h-[22px] bg-[#ECFDF3] rounded-[20px] pr-[7px] pl-[30px]">
                         <span className="w-[7px] h-[7px] bg-[#12B76A] rounded-full inline-block ml-4"></span>
                         تکمیل
@@ -83,6 +85,17 @@ const MembersTable = <T extends object>({
                         ناتمام
                       </span>
                     )
+                  ) : column.key === "gender" ? (
+                    row[column.key] === "male" ? (
+                      <span>مرد</span>
+                    ) : (
+                      <span>زن</span>
+                    )
+                  ) : column.key === "start_date" ? (
+                    moment(
+                      String(row[column.key]),
+                      "YYYY-MM-DD HH:mm:ss"
+                    ).format("jYYYY/jMM/jDD")
                   ) : (
                     String(row[column.key])
                   )}

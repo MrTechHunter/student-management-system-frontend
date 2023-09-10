@@ -12,6 +12,7 @@ type Props = {
 type IAuthContext = {
   isAuthenticated: boolean;
   userProfile: any;
+  token: any;
   loginWithPhoneNumber: (phoneNumber: string) => Promise<void>;
   confirmSmsCode: (phoneNumber: string, code: string) => Promise<any>;
   logout: () => void;
@@ -29,8 +30,9 @@ export function useAuth() {
 }
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userProfile, setUserProfile] = useState<any>(null);
+  const [token, setToken] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
       // If the SMS is sent successfully, update state or redirect
     } catch (error: any) {
       if (error.response) {
-        const responseData = error?.response?.data?.data.message;
+        const responseData = error?.response?.data?.data?.message;
         setErrorMessage(responseData || "");
         console.log(error);
       }
@@ -60,13 +62,14 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         // If verification is successful, set isAuthenticated to true
         setIsAuthenticated(true);
         setUserProfile(response?.data?.data?.profile);
+        setToken(response?.data?.data?.access_token);
         navigate("/");
       }
 
       // Extract and store the user profile data from the response
     } catch (error: any) {
       if (error.response) {
-        const responseData = error?.response?.data?.data.message;
+        const responseData = error?.response?.data?.data?.message;
         setErrorMessage(responseData || "");
         console.log(error);
       }
@@ -86,6 +89,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
       value={{
         isAuthenticated,
         userProfile,
+        token,
         loginWithPhoneNumber,
         confirmSmsCode,
         logout,
